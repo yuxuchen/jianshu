@@ -6,11 +6,13 @@ import {
     NavItem,NavSearch,Addition,
     Button, SearchWrapper
 } from './style';
-import {GlobalStyle} from '../../statics/iconfont/iconfont'
+import {GlobalStyle} from '../../statics/iconfont/iconfont';
+import {ResetStyle} from '../../style';
 
 const Header = (props)=> {
     return(
     <HeaderWrapper>
+        <ResetStyle/>
         <Logo/>
         <GlobalStyle/>
         <Nav>
