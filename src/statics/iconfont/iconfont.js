@@ -3,9 +3,9 @@ import {createGlobalStyle} from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
 @font-face {
   font-family: "iconfont"; /* Project id 2523397 */
-  src: url('//at.alicdn.com/t/font_2523397_ardy9jpfk5p.woff2?t=1619982643701') format('woff2'),
-       url('//at.alicdn.com/t/font_2523397_ardy9jpfk5p.woff?t=161998264370') format('woff'),
-       url('//at.alicdn.com/t/font_2523397_ardy9jpfk5p.ttf?t=1619982643701') format('truetype');
+  src: url('//at.alicdn.com/t/font_2523397_3v7k3nv989h.woff2?t=1620409197388') format('woff2'),
+       url('//at.alicdn.com/t/font_2523397_3v7k3nv989h.woff?t=1620409197388') format('woff'),
+       url('//at.alicdn.com/t/font_2523397_3v7k3nv989h.ttf?t=1620409197388') format('truetype');
 }
 
 .iconfont {
