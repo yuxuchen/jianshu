@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {CSSTransition} from 'react-transition-group';
 import  {actionCreators} from './store';
+import {actionCreators as loginActionCreators} from '../../pages/login/store';
+import { Link } from 'react-router-dom';
 import {
     HeaderWrapper, Logo, Nav, 
     NavItem,NavSearch,SearchInfo,SearchInfoItem, 
@@ -14,7 +16,7 @@ import {ResetStyle} from '../../style';
 class Header extends Component{
     getListArea(){
         const { focused, list, page, mouseIn, totalPage,
-            handleMouseEnter,handleMouseLeave,handleChangePage} 
+            handleMouseEnter,handleMouseLeave,handleChangePage } 
             = this.props;
         const newList = list.toJS();
         const pageList=[];
@@ -56,16 +58,23 @@ class Header extends Component{
         }
     }
     render(){
-        const {focused, handleInputFocus, handleInputBlur, list} = this.props;
+        const {focused, handleInputFocus, handleInputBlur, list, login, logout} = this.props;
         return(
             <HeaderWrapper>
                 <ResetStyle/>
-                <Logo/>
-                <GlobalStyle/>
+                    <Link to = '/'>
+                        <Logo/>
+                    </Link>
+                    <GlobalStyle/>
                 <Nav>
+                <Link to = '/'>
                     <NavItem className='left active'>首页</NavItem>
+                </Link>
                     <NavItem className='left'>下载App</NavItem>
-                    <NavItem className='right'>登陆</NavItem>
+                    {
+                        login ? <NavItem onClick = {logout} className='right'>退出</NavItem> : 
+                        <Link to='/login'><NavItem className='right'>登陆</NavItem></Link>
+                    }
                     <NavItem className='right'>
                         <i className="iconfont">&#xe636;</i>
                     </NavItem>
@@ -85,10 +94,12 @@ class Header extends Component{
                             {this.getListArea()}
                     </SearchWrapper>
                     <Addition>
-                        <Button className='writing'>
-                        <i className="iconfont">&#xe67e;</i>
+                        <Link to='/write'>
+                            <Button className='writing'>
+                                <i className="iconfont">&#xe67e;</i>
                             写文章
                             </Button>
+                        </Link>
                         <Button className='reg'>注册</Button>
                     </Addition>
                 </Nav>
@@ -104,7 +115,8 @@ const mapStateToProps=(state)=>{
         list:state.getIn(['header','list']),
         page:state.getIn(['header','page']),
         mouseIn:state.getIn(['header','mouseIn']),
-        totalPage:state.getIn(['header','totalPage'])
+        totalPage:state.getIn(['header','totalPage']),
+        login: state.getIn(['login','login'])
     }
 }
 const mapDispatchToProps=(dispatch)=>{
@@ -137,7 +149,9 @@ const mapDispatchToProps=(dispatch)=>{
             }else{
                 dispatch(actionCreators.changePage(1));
             }
-            
+        },
+        logout(){
+            dispatch(loginActionCreators.logout())
         }
     }
 }
